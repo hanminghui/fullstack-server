@@ -9,3 +9,6 @@ GET http://localhost:3001/api/notes/2
 
 ### get note doesn't exist
 GET http://localhost:3001/api/notes/5
+
+### delete one note
+DELETE http://localhost:3001/api/notes/2
