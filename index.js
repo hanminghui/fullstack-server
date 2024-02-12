@@ -4,6 +4,7 @@ const app = express()
 const PORT = "3001";
 
 app.use(cors());
+app.use(express.json());
 
 let notes = [
   {
@@ -32,20 +33,34 @@ app.get('/api/notes', (request, response) => {
 })
 
 app.get('/api/notes/:id', (request, response) => {
-    const id = Number(request.params.id);
-    const note = notes.find(note => note.id === id);
-    if(note){
-        response.json(note);
-    }else{
-        response.status(404).end();
-    }
+  const id = Number(request.params.id);
+  const note = notes.find(note => note.id === id);
+  if(note){
+      response.json(note);
+  }else{
+      response.status(404).end();
+  }
 })
 
 app.delete('/api/notes/:id', (request, response) => {
-    const id = Number(request.params.id);
-    notes = notes.filter(note => note.id !== id);
-    response.status(204).end();
+  const id = Number(request.params.id);
+  notes = notes.filter(note => note.id !== id);
+  response.status(204).end();
 });
+
+app.post('/api/notes', (request, response) => {
+  const note = request.body;
+  console.log(note);
+  notes = notes.concat(note);
+  response.json(note);
+})
+
+app.put('/api/notes/:id', (request, response) => {
+  const note = request.body;
+  console.log(note);
+  notes = notes.map(n => n.id === note.id ? note : n);
+  response.json(note);
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

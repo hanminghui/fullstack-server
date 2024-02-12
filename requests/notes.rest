@@ -12,3 +12,11 @@ GET http://localhost:3001/api/notes/5
 
 ### delete one note
 DELETE http://localhost:3001/api/notes/2
+
+### add new note
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "test": "1111"
+}
