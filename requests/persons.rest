@@ -1,7 +1,4 @@
-### home
-GET http://localhost:3001
-
-### get info
+### get person info
 GET http://localhost:3001/api/persons/info
 
 ### get all persons
