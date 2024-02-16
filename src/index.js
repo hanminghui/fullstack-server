@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors');
-const app = express()
-const PORT = "3001";
+const app = express();
+const PORT = process.env.PORT || 3001;
 const notesRouter = require('./controllers/notes');
 const personsRouter = require('./controllers/persons');
 var morgan = require('morgan');
