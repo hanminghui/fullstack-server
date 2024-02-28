@@ -25,9 +25,6 @@ app.use(morgan(function (tokens, req, res) {
 }));
 
 //router
-app.get('/', (request, response) => {
-  response.send('<h1>This is an express.js server.</h1>')
-})
 
 //routers in controllers
 app.use('/api/notes', notesRouter);
