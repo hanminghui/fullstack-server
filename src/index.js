@@ -4,6 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const notesRouter = require('./controllers/notes');
 const personsRouter = require('./controllers/persons');
+const screensRouter = require('./controllers/screens');
 var morgan = require('morgan');
 
 //middleware 
@@ -29,6 +30,7 @@ app.get('/', (request, response) => {
 //routers in controllers
 app.use('/api/notes', notesRouter);
 app.use('/api/persons', personsRouter);
+app.use('/api/screens', screensRouter);
 
 //middleware after routes
 const unknownEndpoint = (request, response) => {
