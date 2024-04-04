@@ -7,7 +7,7 @@ const personsRouter = require('./controllers/persons');
 const screensRouter = require('./controllers/screens');
 var morgan = require('morgan');
 
-app.use(express.static('build'));
+app.use(express.static('dist'));
 
 //middleware 
 app.use(cors());
