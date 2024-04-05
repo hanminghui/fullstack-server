@@ -1,6 +1,7 @@
 // notes route module
 const express = require("express");
 const router = express.Router();
+const Note = require('../models/notes')
 
 let notes = [
     {
@@ -24,7 +25,9 @@ let notes = [
 ];
 
 router.get('/', (request, response) => {
-    response.json(notes)
+    Note.find().then(result => {
+        response.json(result)
+      })
 })
 
 router.get('/:id', (request, response) => {
