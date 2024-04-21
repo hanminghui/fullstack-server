@@ -2,13 +2,13 @@
 GET http://localhost:3001/api/notes
 
 ### get one note
-GET http://localhost:3001/api/notes/2
+GET http://localhost:3001/api/notes/6624b5e3d823bf712c5e8df5
 
 ### get note doesn't exist
 GET http://localhost:3001/api/notes/5
 
 ### delete one note
-DELETE http://localhost:3001/api/notes/2
+DELETE http://localhost:3001/api/notes/6624bed15ef039a9363dca3a
 
 ### add new note
 POST http://localhost:3001/api/notes

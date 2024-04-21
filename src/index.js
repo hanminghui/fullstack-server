@@ -25,6 +25,18 @@ app.use(morgan(function (tokens, req, res) {
   ].join(' ')
 }));
 
+
+// custom errorHandler
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } 
+
+  next(error)
+}
+
 //router
 
 //routers in controllers
@@ -37,6 +49,8 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' });
 }
 app.use(unknownEndpoint);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

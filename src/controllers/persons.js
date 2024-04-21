@@ -1,6 +1,7 @@
 // persons route module
 const express = require("express");
 const router = express.Router();
+const People = require("../models/people")
 
 let persons = [
     {
@@ -30,7 +31,9 @@ let persons = [
 ];
 
 router.get('/', (request, response) => {
-    response.json(persons)
+    People.find().then((result) => {
+        response.json(result);
+    });
 })
 
 router.get('/info', (request, response) => {
@@ -48,9 +51,10 @@ router.get('/:id', (request, response) => {
 })
 
 router.delete('/:id', (request, response) => {
-    const id = Number(request.params.id);
-    persons = persons.filter(x => x.id !== id);
-    response.status(204).end();
+    People.deleteOne({ _id: request.params.id}).then(() => {
+        console.log("successfully deleted")
+        response.status(204).end();
+    });
 });
 
 const generateId = () => {
@@ -76,15 +80,15 @@ router.post('/', (request, response) => {
         })
     }
 
-    const person = {
+    const person = new People({
         name: body.name,
         number: body.number,
-        id: generateId(),
         show: true
-    }
+    })
 
-    persons = persons.concat(person);
-    response.json(person);
+    person.save().then(savedPerson => {
+        response.json(savedPerson);
+    });
 })
 
 router.put('/:id', (request, response) => {
