@@ -17,3 +17,11 @@ Content-Type: application/json
 {
     "content": "1111"
 }
+
+### update note
+PUT http://localhost:3001/api/notes/660fb9a6e423dd2ea939bc3b
+Content-Type: application/json
+
+{
+    "content": "CSS is hard"
+}

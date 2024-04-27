@@ -35,7 +35,7 @@ const generateId = () => {
     return maxId + 1
 }
 
-router.post('/', (request, response) => {
+router.post('/', (request, response, next) => {
     const body = request.body;
     console.log(body);
 
@@ -52,18 +52,18 @@ router.post('/', (request, response) => {
 
     note.save().then(savedNote => {
         response.json(savedNote);
-    });
+    })
+    .catch(error => next(error));
 })
 
 router.put('/:id', (request, response, next) => {
     const body = request.body;
-
-    const note = {
-      content: body.content,
-      important: body.important,
-    }
+    const { content, important } = request.body
   
-    Note.findByIdAndUpdate(request.params.id, note, { new: true })
+    Note.findByIdAndUpdate(request.params.id, 
+        { content, important },
+        { new: true, runValidators: true, context: 'query' }
+    )
       .then(updatedNote => {
         response.json(updatedNote);
       })
